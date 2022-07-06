@@ -1,0 +1,56 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    height: 100vh;
+    display: flex;
+    background-color: rgb(60, 169, 169);
+}
+
+.memory-game{
+    height: 640px;
+    width: 640px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    perspective: 1000px; /*mostra a perspectiva do usuário no eixo Z (eixo 3D). Quanto maior, maior o efeito 3D*/
+}
+
+.card{
+    height: calc(33.333% - 10px);
+    width: calc(25% - 10px);
+    margin: 5px;
+    position: relative;
+    box-shadow: 1px 1px 1px rgba(1, 1, 1, .3);
+    cursor: pointer;
+    transform: scale(1);
+    transform-style: preserve-3d; /*executa o efeito 3D na perspectiva de memory-game. não deixa as cartas ficarem achatadas*/
+    transition: transform .9s; /*anima o transform style*/
+}
+
+/*trata o efeito ao clicar/segurar click na figura, como se fosse um efeito de botão*/
+.card:active{
+    transform: scale(0.93);/*diminui ou aumenta o tamanho proporcionalmente*/
+    transition: transform .3s;/*anima o transform scale*/
+}
+
+.card-front, .card-back{
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    position: absolute;
+    border-radius: 5px;
+    background: #ffffff;
+    backface-visibility: hidden;/*retira o verso do elemento*/
+}
+
+/*Para executar o efeito da classe flip (toggle js), precisamos estilizá-la*/
+.card-front{
+    transform: rotateY(180deg);/*roda no eixo vertical*/
+}
+.card.flip{
+    transform: rotateY(180deg);
+}
